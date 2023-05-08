@@ -35,15 +35,23 @@ values = InfoLigne.objects.filter(date_dep__gt=datetime.datetime.now()).values_l
 choices = [(value[0], value[1]) for value in values]
 
 
-
+destinataires=[('La plateforme','La plateforme'),
+               ('Nagode','Compagnie Nagode'),
+               ('Rakieta','Compagnie Rakieta'),
+               ('Etrab','Compagnie Etrab'),
+               ('Adji Transport','Compagnie Adji transport'),
+               ('DC 10','Compagnie DC 10'),
+               ('Cheval Blanc','Compagnie Cheval Blanc'),
+               ('LK','Compagnie LK'),]
 
 
 class SuggestionForm(forms.ModelForm):
     class Meta:
         model=Suggestion
-        fields=('email','message')
+        fields=('email','destinataire','message')
         widgets = {
             'email': forms.EmailInput(attrs={'class': 'input100', 'placeholder':'Email'}),
+            'destinataire': forms.Select(attrs={'class': 'input100', 'placeholder':''},choices=destinataires),
             'message': forms.Textarea(attrs={'class': 'input100', 'placeholder':'Saisissez Votre Message...'}),
         }
 
